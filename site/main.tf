@@ -1,10 +1,3 @@
-variable "aws" {
-  type = "map"
-  default = {
-    profile = "east1"
-    region = "us-east-1"
-  }
-}
 provider "aws" {
   region = "${var.aws["region"]}"
   profile = "${var.aws["profile"]}"
@@ -14,5 +7,7 @@ terraform {
 }
 module "es" {
   source = "../es"
-
+  name = "${var.name}"
+  aws = "${var.aws}"
+  es_config = "${var.es_config}"
 }
